@@ -1,0 +1,38 @@
+# deps
+node_modules/
+.pnp/
+.pnp.js
+
+# builds
+dist/
+.next/
+out/
+build/
+
+# env
+.env
+.env.local
+.env.*.local
+apps/*/.env
+apps/*/.env.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# tsc
+*.tsbuildinfo
+
+# test artifacts
+coverage/

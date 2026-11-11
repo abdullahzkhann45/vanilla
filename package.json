@@ -1,0 +1,21 @@
+{
+  "name": "vanilla",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm --workspace apps/api run dev\" \"npm --workspace apps/web run dev\"",
+    "dev:api": "npm --workspace apps/api run dev",
+    "dev:web": "npm --workspace apps/web run dev",
+    "build": "npm --workspace apps/api run build && npm --workspace apps/web run build",
+    "seed": "npm --workspace apps/api run seed",
+    "test": "npm --workspace apps/api run test:logic",
+    "typecheck": "npm --workspace apps/api exec tsc -- --noEmit && npm --workspace apps/web exec tsc -- --noEmit"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
