@@ -36,7 +36,8 @@ export interface Product {
   description: string;
   fabric: string;
   care: string;
-  basePrice: number; // paisa
+  basePrice: number; // paisa — the price customers pay
+  compareAtPrice?: number; // paisa — original/"was" price, shown struck through
   currency: 'PKR';
   images: Image[];
   variants: Variant[];
