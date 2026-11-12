@@ -102,50 +102,10 @@ export async function seed(opts: { uri?: string; disconnect?: boolean } = {}) {
 
   const db = mongoose.connection.db!;
 
-  // -- products
+  // -- products: the real catalogue is inserted by `npm run add:product`.
+  // Seed only ensures the unique index exists; it never creates placeholders.
   const productsCol = db.collection('products');
   await productsCol.createIndex({ slug: 1 }, { unique: true });
-
-  for (const p of products) {
-    const variants = p.colours.flatMap((colour) =>
-      SIZES.map((size) => ({
-        sku: `${p.skuRoot}-${colour.replace(/\s+/g, '').toUpperCase().slice(0, 3)}-${size}`,
-        size,
-        colour,
-        price: p.basePrice,
-        stock: 15,
-        isActive: true,
-      })),
-    );
-    const images = p.colours.map((c, i) => ({
-      url: placeholderImage(`${p.gsm} GSM · ${c}`, c, p.kind),
-      alt: `${p.name} in ${c}`,
-      order: i,
-    }));
-
-    await productsCol.updateOne(
-      { slug: p.slug },
-      {
-        $set: {
-          slug: p.slug,
-          name: p.name,
-          type: p.type,
-          description: p.description,
-          fabric: p.fabric,
-          care: p.care,
-          basePrice: p.basePrice,
-          currency: 'PKR',
-          images,
-          variants,
-          isPublished: true,
-          updatedAt: new Date(),
-        },
-        $setOnInsert: { createdAt: new Date() },
-      },
-      { upsert: true },
-    );
-    console.log(`[seed] product: ${p.slug} (${variants.length} variants)`);
-  }
 
   // -- admin
   const adminsCol = db.collection('adminusers');
