@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { adminFetch } from '@/lib/admin-client';
-import { formatPKR, Order } from '@vanilla/shared';
+import { formatPKR, Order } from '@/lib/shared';
 
 const NEXT: Record<string, string[]> = {
   pending_confirmation: ['confirmed', 'cancelled'],

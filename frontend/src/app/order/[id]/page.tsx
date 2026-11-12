@@ -1,5 +1,5 @@
 import { api } from '@/lib/api';
-import { formatPKR, Order } from '@vanilla/shared';
+import { formatPKR, Order } from '@/lib/shared';
 import { PurchaseEvent } from './PurchaseEvent';
 
 export const dynamic = 'force-dynamic';

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { api } from '@/lib/api';
-import { formatPKR, Product } from '@vanilla/shared';
+import { formatPKR, Product } from '@/lib/shared';
 import { ProductBuy } from './ProductBuy';
 
 export const revalidate = 300;

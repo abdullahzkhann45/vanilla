@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { api } from '@/lib/api';
-import { formatPKR, Product, Size } from '@vanilla/shared';
+import { formatPKR, Product, Size } from '@/lib/shared';
 import { Reveal } from '@/components/Reveal';
 import { TiltCard } from '@/components/TiltCard';
 

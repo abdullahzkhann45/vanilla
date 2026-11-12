@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { adminFetch } from '@/lib/admin-client';
-import { formatPKR, Order } from '@vanilla/shared';
+import { formatPKR, Order } from '@/lib/shared';
 
 const STATUSES = ['', 'pending_confirmation', 'pending', 'confirmed', 'packed', 'shipped', 'delivered', 'cancelled', 'returned'];
 

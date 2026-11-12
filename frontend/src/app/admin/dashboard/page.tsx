@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { adminFetch } from '@/lib/admin-client';
-import { formatPKR } from '@vanilla/shared';
+import { formatPKR } from '@/lib/shared';
 
 type Window = { orders: number; revenue: number };
 type Variant = { variantSku: string; productName: string; size: string; colour: string; units: number; revenue: number };

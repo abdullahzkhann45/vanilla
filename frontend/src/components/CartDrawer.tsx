@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/lib/cart-store';
-import { formatPKR } from '@vanilla/shared';
+import { formatPKR } from '@/lib/shared';
 
 export function CartDrawer() {
   const path = usePathname();

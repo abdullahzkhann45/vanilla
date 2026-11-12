@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { adminFetch } from '@/lib/admin-client';
-import { Discount, formatPKR } from '@vanilla/shared';
+import { Discount, formatPKR } from '@/lib/shared';
 
 export default function AdminDiscounts() {
   const [items, setItems] = useState<Discount[]>([]);

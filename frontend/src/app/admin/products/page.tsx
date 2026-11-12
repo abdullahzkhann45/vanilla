@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { adminFetch } from '@/lib/admin-client';
-import { formatPKR, Product } from '@vanilla/shared';
+import { formatPKR, Product } from '@/lib/shared';
 
 export default function AdminProducts() {
   const [items, setItems] = useState<Product[]>([]);

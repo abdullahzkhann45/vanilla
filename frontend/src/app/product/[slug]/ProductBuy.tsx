@@ -2,7 +2,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { formatPKR, Product, Variant, Size } from '@vanilla/shared';
+import { formatPKR, Product, Variant, Size } from '@/lib/shared';
 import { useCart } from '@/lib/cart-store';
 import { trackViewItem, trackAddToCart } from '@/lib/analytics';
 

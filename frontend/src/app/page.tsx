@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { api } from '@/lib/api';
-import { formatPKR, Product } from '@vanilla/shared';
+import { formatPKR, Product } from '@/lib/shared';
 import { ClothHero } from '@/components/ClothHero';
 import { Reveal } from '@/components/Reveal';
 import { Magnetic } from '@/components/Magnetic';

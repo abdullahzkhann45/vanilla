@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-store';
-import { formatPKR } from '@vanilla/shared';
+import { formatPKR } from '@/lib/shared';
 
 export default function CartPage() {
   const { totals, setQty, remove } = useCart();

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { adminFetch } from '@/lib/admin-client';
-import { Settings } from '@vanilla/shared';
+import { Settings } from '@/lib/shared';
 
 export default function AdminSettings() {
   const [s, setS] = useState<Settings | null>(null);

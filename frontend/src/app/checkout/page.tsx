@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-store';
-import { formatPKR } from '@vanilla/shared';
+import { formatPKR } from '@/lib/shared';
 import { trackBeginCheckout } from '@/lib/analytics';
 
 export default function CheckoutPage() {
