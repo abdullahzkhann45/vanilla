@@ -130,7 +130,7 @@ export function ProductBuy({ product }: { product: Product }) {
                     onClick={() => setSize(s)}
                   >
                     <span>{s}</span>
-                    <span className="size-stock">{soldOut ? 'Out' : `${stock} left`}</span>
+                    {soldOut && <span className="size-stock">Out</span>}
                   </button>
                 );
               })}
@@ -189,11 +189,11 @@ export function ProductBuy({ product }: { product: Product }) {
               </tr>
             ))}
             <tr>
-              <td>In stock ({colour})</td>
+              <td>Availability ({colour})</td>
               {SIZES.map((s) => {
                 const v = variants.find((x) => x.size === s);
                 const stock = v && v.isActive ? v.stock : 0;
-                return <td key={s} className={size === s ? 'hl' : stock > 0 ? '' : 'oos'}>{stock > 0 ? `${stock} units` : 'Sold out'}</td>;
+                return <td key={s} className={size === s ? 'hl' : stock > 0 ? '' : 'oos'}>{stock > 0 ? 'In stock' : 'Sold out'}</td>;
               })}
             </tr>
           </tbody>

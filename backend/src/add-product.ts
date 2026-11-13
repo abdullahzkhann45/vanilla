@@ -31,7 +31,7 @@ const products: ProductDef[] = [
     care: 'Wash cold, inside out, dry flat. Cool iron if you like a crease.',
     basePrice: 256000, // PKR 2,560
     compareAtPrice: 350000, // PKR 3,500
-    colours: ['Charcoal'],
+    colours: ['Black'],
     skuRoot: 'VNL-WL01',
     images: [
       '/products/wide-leg-heavy/1.jpg',

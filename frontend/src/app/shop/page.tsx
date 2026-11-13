@@ -78,7 +78,6 @@ function ShopTile({ t }: { t: { product: Product; colour: string; gsm: number; i
     const v = t.product.variants.find((x) => x.colour === t.colour && x.size === s);
     return v && v.isActive ? v.stock : 0;
   };
-  const total = SIZES.reduce((n, s) => n + stockOf(s), 0);
   const sub = `${t.colour} · ${t.product.fabric.split('·')[0].trim()}`;
   return (
     <Link href={`/product/${t.product.slug}?c=${encodeURIComponent(t.colour)}`} className={`card ${t.allOut ? 'sold' : ''}`}>
@@ -100,7 +99,7 @@ function ShopTile({ t }: { t: { product: Product; colour: string; gsm: number; i
           {formatPKR(t.product.basePrice)}
         </span>
       </div>
-      <div className="sub">{sub}{total > 0 ? ` · ${total} in stock` : ''}</div>
+      <div className="sub">{sub}</div>
       <div className="sizes">
         {SIZES.map((s) => (
           <span key={s} className={stockOf(s) > 0 ? '' : 'oos'}>{s}</span>
