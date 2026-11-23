@@ -2,6 +2,22 @@ import { sendGAEvent } from '@next/third-parties/google';
 
 // GA4 is enabled only when the measurement ID is present.
 export const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// Meta (Facebook) Pixel is enabled only when the pixel ID is present.
+export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
+// Meta Pixel global, injected by the <MetaPixel> base code.
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+function fbTrack(event: string, params: Record<string, unknown>) {
+  if (!META_PIXEL_ID) return;
+  if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+    window.fbq('track', event, params);
+  }
+}
 
 // Prices are stored as integer paisa. GA4 expects a decimal rupee amount
 // (6500.00, not 650000). Integer math first, then divide, to avoid float drift.
@@ -38,6 +54,13 @@ export function trackViewItem(item: GAItemInput) {
     value: toRupees(item.pricePaisa),
     items: [buildItem(item)],
   });
+  fbTrack('ViewContent', {
+    content_type: 'product',
+    content_ids: [item.id],
+    content_name: item.name,
+    currency: 'PKR',
+    value: toRupees(item.pricePaisa),
+  });
 }
 
 export function trackAddToCart(item: GAItemInput & { quantity: number }) {
@@ -45,6 +68,14 @@ export function trackAddToCart(item: GAItemInput & { quantity: number }) {
     currency: 'PKR',
     value: toRupees(item.pricePaisa * item.quantity),
     items: [buildItem(item)],
+  });
+  fbTrack('AddToCart', {
+    content_type: 'product',
+    content_ids: [item.id],
+    content_name: item.name,
+    contents: [{ id: item.id, quantity: item.quantity }],
+    currency: 'PKR',
+    value: toRupees(item.pricePaisa * item.quantity),
   });
 }
 
@@ -54,6 +85,14 @@ export function trackBeginCheckout(cartValuePaisa: number, items: GAItemInput[])
     value: toRupees(cartValuePaisa),
     items: items.map(buildItem),
   });
+  fbTrack('InitiateCheckout', {
+    content_type: 'product',
+    content_ids: items.map((i) => i.id),
+    contents: items.map((i) => ({ id: i.id, quantity: i.quantity ?? 1 })),
+    num_items: items.reduce((n, i) => n + (i.quantity ?? 1), 0),
+    currency: 'PKR',
+    value: toRupees(cartValuePaisa),
+  });
 }
 
 export function trackPurchase(orderNumber: string, totalPaisa: number, items: GAItemInput[]) {
@@ -62,5 +101,14 @@ export function trackPurchase(orderNumber: string, totalPaisa: number, items: GA
     currency: 'PKR',
     value: toRupees(totalPaisa),
     items: items.map(buildItem),
+  });
+  fbTrack('Purchase', {
+    content_type: 'product',
+    content_ids: items.map((i) => i.id),
+    contents: items.map((i) => ({ id: i.id, quantity: i.quantity ?? 1 })),
+    num_items: items.reduce((n, i) => n + (i.quantity ?? 1), 0),
+    currency: 'PKR',
+    value: toRupees(totalPaisa),
+    order_id: orderNumber,
   });
 }
