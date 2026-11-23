@@ -10,8 +10,17 @@ import { Cursor } from '@/components/Cursor';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { MetaPixel } from '@/components/MetaPixel';
 
+// Resolve the public site URL, ignoring unset or placeholder values that may
+// have been pasted into the env (e.g. "https://your-vercel-url"). A valid,
+// absolute URL is required for Open Graph images to load in link previews.
+const SITE_URL = (() => {
+  const v = process.env.NEXT_PUBLIC_SITE_URL;
+  if (v && /^https?:\/\//i.test(v) && !/your-|example\.|YOUR-|localhost/i.test(v)) return v;
+  return 'https://vanillaretail.com';
+})();
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://vanilla-gules.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   title: 'Vanilla — Lahore',
   description:
     'Four pieces. One cloth. A sweats brand from Lahore — long-staple cotton, cut, sewn and washed in Pakistan.',

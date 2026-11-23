@@ -3,7 +3,8 @@ import { api } from '@/lib/api';
 import { Product } from '@/lib/shared';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const base = envUrl && !/your-|example\.|localhost/i.test(envUrl) ? envUrl : 'https://vanillaretail.com';
   const products = await api<Product[]>('/products').catch(() => []);
   const now = new Date();
   return [
